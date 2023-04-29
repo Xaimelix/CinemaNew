@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/schedule.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+    <title>Расписание</title>
+
+</head>
+<body>
+<header>
+    <div class="dates-nav" style="position: relative; left: 30%; top: 10px;">
+        <h1>{{new_date_days}}</h1>
+        {% for day in week %}
+        {% if day[-1] == '(Сегодня)'%}
+        <a class="btn btn-primary" type="button" href="/schedule">{{ day[0] }} {{ day[2] }} {{ day[-1] }}</a>
+        {% elif day[0] == light_the_button_with_date %}
+        <a class="btn btn-success" type="button" href="/schedule/{{ day[1] }}-{{ day[0] }}">{{ day[0] }} {{ day[-1] }}
+        </a>
+        {% else %}
+        <a class="btn btn-secondary" type="button" href="/schedule/{{ day[1] }}-{{ day[0] }}">{{ day[0] }} {{ day[-1] }}
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+</header>
+<div style="display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    width: 100%; position: absolute; top: 100px; left:500px;">
+    {% if not sessions %}
+    <h1 style="text-align: center;">К сожалению, на эту дату не назначено сеансов:(</h1>
+    {% else %}
+    {% for item in sessions %}
+    {% for film in films %}
+    {% if item.id_film == film.id %}
+    <div style="position: relative;">
+        <a href="/session/{{ item.id }}/{{ film.id }}"><img style="width: 200px;
+                height: 300px;
+                margin: 30px;
+                outline: 3px solid #666;" src="{{ film.url_poster }}"
+                                              alt="{{ film.url_poster }}"></a>
+        <div style="display: inline-block;">
+            <h3 style="font-family: 'Electrolize', sans-serif; font-weight: bold;">{{ film.name }}</h3>
+            <h4 style="">{{ film.rating }}&#x2B50;</h4>
+            <h4 style="height: 100%; width: 50%">{{ film.short_description }} </h4>
+            <h3 style="color: green; height: 100%; width: 50%; font-weight: bold;"> {{ item.time }}</h3>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+</div>
+<a class="btn btn-warning" role="button" style="position: relative; left: 5%;" href="/">На главную</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>Купиить билет на сеанс </title>
+</head>
+<body>
+{% if not no_places %}
+    <div style="text-align: center; position: relative; top: 100px; width: 2000px" class="container">
+        <h1 style="color: blue; font-weight: bold;">Покупка билета</h1><br>
+        <h4 style="margin-left: auto; margin-right: auto; font-weight: bold;">Номер зала: <span style="color: red;">{{ id_room }}</span>
+        </h4>
+        <h4 style="position: relative; top: 100px; font-weight: bold;">Все верно?<br>Если да, то жми &#128071;</h4>
+        <a class="btn btn-success btn-lg" type="button" style="position: relative; top: 200px;" href="/bought/{{sess_id}}">Оплатить✔</a>
+    </div>
+    <h4 style="position: absolute; left: 10%; top: 10%; font-weight: bold; outline: 3px solid gray; padding: 10px;">Дата
+        сеанса: {{ date }}</h4>
+    <h4 style="position: absolute; left: 10%; top: 20%; font-weight: bold; outline: 3px solid gray; padding: 10px;">Время:
+        {{
+        time }}</h4>
+    <a class="btn btn-warning" role="button" style="position: absolute; left: 85%; top: 80px;" href="/">На главную</a>
+{% else %}
+    <div style="text-align: center; position: relative; top: 100px; width: 2000px" class="container">
+        <h1 style="color: blue; font-weight: bold;">Покупка билета</h1><br>
+        <h4 style="margin-left: auto; margin-right: auto; font-weight: bold;">Похоже что все места на этот сеанс уже раскупили &#128577;
+        </h4>
+        <br>
+        <a class="btn btn-warning" role="button" style="" href="/">На главную</a>
+    </div>
+
+{% endif %}
+
+
+</body>
+</html>

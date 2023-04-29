@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+    <title>{{title}}</title>
+</head>
+<body>
+<header>
+    <nav class="navbar bg-dark" data-bs-theme="dark">
+
+        {% if current_user.is_authenticated %}
+        <a class="navbar-brand" href="/profile"> {{ current_user.login }} </a>
+        {% else %}
+        <p>
+            <a class="btn btn-warning " href="/register">Зарегистрироваться</a>
+            <a class="btn btn-warning" href="/login">Войти</a>
+        </p>
+        {% endif %}
+        <h3 class="tracking-in-expand-fwd top-50 start-50">Сегодня, {{today}}</h3>
+    </nav>
+    </header>
+
+
+
+    <div class="tracking-in-contract-bck-bottom" >
+        <h3>Сеансы на сегодня: <span style="color: red">{{ count_sessions }}</span></h3>
+        <a class="btn btn-outline-warning" role="button" href="/schedule">Расписание на другие
+            даты</a>
+    </div>
+
+    <div class="tracking-in-contract-bck" style="position: relative; top: 70px;  display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    width: 100%; position: absolute; top: 100px; left:500px;">
+        {% for item in sessions %}
+        {% for film in films %}
+        {% if item.id_film == film.id %}
+        <div style="display: inline-block;">
+            <a href="/session/{{ item.id }}/{{ film.id }}"><img style="width: 300px; padding: 10px; margin: 30px;
+                outline: 3px solid #666;" class="FilmBaseImg" src="{{ film.url_poster }}"></a>
+            <div style="display: inline-block;">
+                <h3 style="font-family: 'Electrolize', sans-serif; font-weight: bold;">{{ film.name }}</h3>
+                <h4 style="">{{ film.rating }}&#x2B50;</h4>
+                <h4 style="color: green;">Дата: {{ item.date }} <br> Время: {{item.time }}</h4>
+                <a class="btn btn-warning" href="/session/{{ item.id }}/{{ film.id }}">Купить билет</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+    </div>
+<!-- Begin page content -->
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

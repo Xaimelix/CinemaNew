@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/profile.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+</head>
+<body>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-secondary" style ="font-size: 100px; color: #f2a90c;
+        background: #000000">
+            {{ current_user.login }}
+        </li>
+        <form style="position: absolute, top: 10, left: 300" method="post" enctype="multipart/form-data">
+       <div class="card" style="width: 18rem; background: #000000">
+          <img src="static/img/avatar.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <label for="photo", style="color: #f2a90c; position: absolute, top: 10, left: 300">Выберите файл</label>
+            <input style="color: #f2a90c" type="file" class="form-control-file" id="photo" name="file">
+            </div>
+       </div>
+        <button type="submit" class="btn btn-primary" style="color: #f2a90c">Отправить</button>
+        </form>
+        {% if tickets > 0 %}
+            {% for ticket in range(1, tickets + 1) %}
+                    <li class="list-group-item list-group-item-dark" style="background: #696969;
+                    border: 2px solid #f2a90c">
+                        <img src="/static/img/tickets/ticket_{{ticket}}.png">
+                    </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <button class="btn btn-outline-danger" style="position: absolute;top: 40px; left: 1100px; width: 300px;
+    height: 100px; background: #8B4513">
+        <a style="position: absolute, left: 40, top: 20; font-size: 60px; color: #f2a90c;"
+           href="/logout">Выйти</a>
+    </button>
+
+    <button class="btn btn-warning" style="position: absolute; left: 700px;
+        top: 40px; width: 300px; height: 100px; background: #8B4513; font-size: 30px">
+        <a  style="position: absolute, left: 60, top: 40; font-size: 40px; color: #f2a90c;"
+            href="/">На главную</a>
+    </button>
+
+
+</body>
+</html>

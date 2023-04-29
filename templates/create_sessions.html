@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/create_sessions.css">
+    <title>Создать сеанс</title>
+</head>
+<body>
+    <h1>Форма создания сеанса</h1>
+    <div>
+        <form class="session_form" method="post" action="" novalidate>
+            <input type="number" class="form-control" id="id_film" placeholder="Введите id фильма не большее 250" max="250" name="id_film">
+            <input type="date" class="form-control" id="data" placeholder="Введите дату" name="date">
+            <input type="time" class="form-control" id="time" placeholder="Введите дату" name="time">
+            <input type="number" class="form-control" id="cost" placeholder="Введите цену" name="cost">
+            <input type="number" class="form-control" id="amount" placeholder="Введите количество мест" name="amount">
+            <input type="number" class="form-control" id="id_room" placeholder="Введите номер зала" name="id_room">
+            <button type="submit" class="btn btn-primary" name="submit">Создать</button>
+        </form>
+    </div>
+</body>
+</html>
